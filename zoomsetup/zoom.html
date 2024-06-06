@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zoom Integration Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+
+</head>
+<body>
+
+  <!-- Your website content goes here -->
+
+  <script>
+    var sdkKey = '2XG7RcunQGW3-KX5pxUIXQ';
+    var signature = 'PbPTETN3ME2Hb5EbtJCZwYRWjjqm9gMlxHxQ'; // Role in SDK Signature needs to be 1
+    var meetingNumber = '123456767';
+    var password = 'YOUR_MEETING_PASSWORD';
+    var userName = 'vishnu@ulipsu.com';
+    var zakToken; // The host's ZAK token
+
+    // Function to generate the ZAK token
+    /*function generateZAKToken() {
+      var apiKey = '2XG7RcunQGW3-KX5pxUIXQ';
+      var apiSecret = 'PbPTETN3ME2Hb5EbtJCZwYRWjjqm9gMlxHxQ';
+      var userId = 'ulipsulms@gmail.com'; // User ID or email of the Zoom account acting as the host
+
+      var credentials = apiKey + ':' + apiSecret;
+      var encodedCredentials = btoa(credentials);
+      var headers = {
+        'Authorization': 'Basic ' + encodedCredentials,
+        'Content-Type': 'application/json'
+      };
+
+      $.ajax({
+        url: 'https://api.zoom.us/v2/users/' + userId + '/token?type=zak',
+        type: 'POST',
+        headers: headers,
+        success: function(response) {
+          zakToken = response.token;
+          console.log('ZAK Token:', zakToken);
+          joinMeeting();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.error('Error generating ZAK token:', errorThrown);
+        }
+      });
+    }*/
+
+    // Function to join the Zoom meeting
+    function joinMeeting() {
+      client.join({
+        sdkKey: sdkKey,
+        signature: signature,
+        meetingNumber: meetingNumber,
+        password: password,
+        userName: userName,
+        zak: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6IjJYRzdSY3VuUUdXMy1LWDVweFVJWFEiLCJleHAiOjE2ODU3ODU1MTQsImlhdCI6MTY4NTc4MDExNH0.rExoC5bJvyaMGrOQTbyBLFSbk1wT5QUDPYA2njeJlzc'
+      });
+    }
+
+    // Call the function to generate the ZAK token
+    //generateZAKToken();
+  </script>
+
+  <!-- Include the Zoom Web SDK -->
+  <script src="https://source.zoom.us/zoom-meeting-1.9.1.min.js"></script>
+  <script src="https://source.zoom.us/zoom-meeting-1.9.1.min.js"></script>
+  <script>
+    // Initialize the Zoom Web SDK client
+    var client = ZoomMtg.createClient({
+      apiKey: sdkKey,
+      meetingInfo: []
+    });
+
+     Load the Zoom Web SDK dependencies and join the meeting
+    ZoomMtg.preLoadWasm();
+    ZoomMtg.prepareJssdk();
+
+    // Event listener for when the Zoom Web SDK is ready
+    document.addEventListener('DOMContentLoaded', function(event) {
+      // Join the meeting once the Zoom Web SDK is ready
+      ZoomMtg.init({
+        leaveUrl: 'http://clapmasterdemo.ulipsu.com/',
+        success: function() {
+          joinMeeting();
+        },
+        error: function(res) {
+          console.error('Zoom Web SDK initialization failed:', res);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

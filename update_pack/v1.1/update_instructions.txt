@@ -1,0 +1,15 @@
+Please follow the instructions carefully.
+
+N.B :
+ - BEFORE UPDATING TO THE LATEST VERSION, WE WOULD HIGHLY APPRECIATE IF YOU KEEP A BACKUP OF THE EXISTING VERSION.
+
+ - Before updating to version 1.1, make sure that you currently running your product on version 1.0.
+
+Let's proceed,
+- Replace the Updater.php file manually with existing Updater.php file on your server.
+	-File location: Root directory > application > controllers > Updater.php
+- Go to system settings from settings menu in admin panel
+- Move to the section 'Update Product' on that page
+- Upload the file 'update_1.1.zip' which is located at update_pack > v1.1 folder inside your copy of Mastery-LMS downloaded from Codecanyon.
+- Hit the button 'Update product version'.
+- That's it.
